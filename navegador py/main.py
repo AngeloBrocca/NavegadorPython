@@ -39,9 +39,9 @@ class MainWindow(QMainWindow):
        netflix_btn.triggered.connect(self.navigate_netflix)
        navbar.addAction(netflix_btn)
 
-       youtube_btn = QAction('YouTube', self)
-       youtube_btn.triggered.connect(self.navigate_yt)
-       navbar.addAction(youtube_btn)
+       g1_btn = QAction('G1', self)
+       g1_btn.triggered.connect(self.navigate_g1)
+       navbar.addAction(g1_btn)
 
        alura_btn = QAction('Alura', self)
        alura_btn.triggered.connect(self.navigate_alura)
@@ -55,14 +55,18 @@ class MainWindow(QMainWindow):
    def navigate_alura(self):
        self.browser.setUrl(QUrl('https://alura.com.br/'))
 
-   def navigate_yt(self):
-       self.browser.setUrl(QUrl('https://youtube.com/'))
+   def navigate_g1(self):
+       self.browser.setUrl(QUrl('https://g1.globo.com/'))
 
    def navigate_netflix(self):
        self.browser.setUrl(QUrl('https://netflix.com/br/'))
 
    def navigate_to_url(self):
        url = f'https://{self.url_bar.text()}'
+       if('https://' in self.url_bar.text()):
+           url = self.url_bar.text()
+       if('.com' or '.org' or '.br' not in self.url_bar.text()):
+           url = f'https://www.google.com/search?q={self.url_bar.text()}'
        self.browser.setUrl(QUrl(url))
 
    def update_url(self, q):
